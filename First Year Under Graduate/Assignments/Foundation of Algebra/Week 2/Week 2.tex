@@ -1,0 +1,132 @@
+\documentclass[12pt, a4paper, oneside]{ctexart}
+\usepackage{amsmath, amsthm, amssymb, bm, color, framed, graphicx, hyperref, mathrsfs}
+
+\title{\textbf{代数学基础 2025秋 USTC}}
+\author{姓名：石泊远$ \hspace{1cm} $学号：PB25000051}
+\date{\today}
+\linespread{1.5}
+\definecolor{shadecolor}{RGB}{241, 241, 255}
+\newcounter{problemname}
+\newenvironment{problem}{\begin{shaded}\stepcounter{problemname}\par\noindent\textbf{Assignments ~ \arabic{problemname}. }}{\end{shaded}\par}
+\newenvironment{solution}{\par\noindent\textbf{Proof. }}{\par}
+\newenvironment{note}{\par\noindent\textbf{Assignments ~ \arabic{problemname}'s Remark. }}{\par}
+\newenvironment{remark}{\noindent \textbf{Remark.}}{}
+
+\begin{document}
+	
+	\maketitle
+	
+	\begin{problem}
+		\\ 若$ n \in \mathbb{N}^{*} $，证明$gcd\left( n! + 1, (n + 1)! + 1 \right) = 1$
+	\end{problem}
+	
+	\begin{solution}
+		借助辗转相除的思想，我们有
+		\begin{align*}
+			gcd\left(n!+1 , \left(n+1\right)! + 1\right) = gcd\left( n!+1, \left(n+1\right) \left(n! + 1\right) - n \right) = gcd \left(n! + 1, n\right) \\
+			= gcd \left(1,n\right) = 1
+		\end{align*}
+	\end{solution}
+	
+	\begin{problem}
+		\\ 用Euclid算法求$963$和$657$的最大公约数，并求方程$$ 963x + 657y = gcd(963,657) $$的一组特解和所有整数解
+	\end{problem}
+	
+	\begin{solution}
+		用Euclid算法求$963$和$657$的最大公约数： \\
+		\begin{align*}
+			963 &= 1 \times 657 + 306 \\
+			657 &= 2 \times 306 + 45 \\
+			306 &= 6 \times 45 + 36 \\
+			45 &= 1 \times 36 + 9 \\
+			36 &= 4 \times 9 + 0
+		\end{align*}
+		
+		由于最后一步的余数为0，因此$\gcd(963, 657) = 9$。 \\
+		求方程$ 963x + 657y = gcd(963,657) $的一组特解和所有整数解： \\
+		反着一步一步带入可得$ 22*659 - 15*963 = 9 $，故此为一组正整数解 \\
+		方程$963x + 657y = 9$的通解为：
+		\begin{align*}
+			x &= -15 + \frac{657}{9}k = -15 + 73k \\
+			y &= 22 - \frac{963}{9}k = 22 - 107k
+		\end{align*}
+		
+		其中$k$为任意整数。
+	\end{solution}
+	
+	\begin{problem}
+		\\ 设$a,b \in \mathbb{N}^{*}$，且$gcd \left( a,b \right) = 1 $。证明当$n > ab - a - b$，方程$$ ax + by = n $$存在非负整数解。但当$n = ab - a - b$时，方程无非负整数解。
+	\end{problem}
+	
+	\begin{solution}
+		我们先证后一个命题，即当$n = ab - a - b$时，方程无非负整数解。 \\
+		假设存在一个非负整数解$ \left( x,y \right) $，则整理得$ a(x+1)+b(y+1) = ab $，而$gcd \left( a,b \right) = 1$，故可以得到$ a \mid y+1, b \mid x+1 $，一个基本的思路是设$y+1 = ma,x+1 = nb $,其中$m,n \in \mathbb{N}^{*} $ 则 $\Longrightarrow m + n = 1$，矛盾，也可以直接用整除导出不等关系然后证出矛盾，故不存在正整数解 \\
+		再证前一个命题，即当$n > ab - a - b$，方程$$ ax + by = n $$存在非负整数解。 \\
+		我们现在知道它存在整数解，先设为$x_0$与$y_0$，再扩增为一组通解
+		\begin{align*}
+			x = x_0 + bt \\
+			y = y_0 - at
+		\end{align*}
+		同时研究两个变量是困难的，我们先考察一个单变量$x$，在$x \geq 0 $，如果要同时让$y \geq 0$，让$x$尽可能小可以更容易的达成这一点 \\
+		一定存在一个$t$，使得$x \in \left[ 0,b \right)$，并且我们可以认为它一定会成立，因为这是最小的，下面我们证明这一点。
+		此时$y = \dfrac{n-ax}{b}$，又有$n-ax > ab-a-b-\left(ab - a\right) = -b \Longrightarrow y > -1 $，而$ y \in \mathbb{Z}$，故$y$为正整数 \\
+	\end{solution}
+	
+	\begin{problem}
+		\\ 如果整数$n > 2$，证明$n$到$ n! $之间至少有一个素数，由此证明素数有无穷多。
+	\end{problem}
+	
+	\begin{solution}
+		我们先对问题进行分析，和素数有关的只有算术基本定理中涉及到过，所以考虑使用它 \\
+		首先$1,2...,n$是$n!$的因数，所以他们不可能是$n!-1$的因数 \\
+		如果$n! - 1$是质数，则$n$到$n!$间有质数 \\
+		如果$n! - 1$不是质数，则$n$到$n!$间一定有它的质因子，所以则$n$到$n!$间有质数 \\
+		就证明了$n$到$ n! $之间至少有一个素数 \\
+		我们取$n!$为新的$n$，记为$n_1$，可知$n_1$到$n_1!$间至少有一个质数，这个过程可以一直进行下去，所以素数有无穷多个 \\
+		弱哥德巴赫猜想，Betrend, Legendre
+	\end{solution}
+	
+	\begin{problem}
+		\\ 1.设$m$为正整数，证明：若$2^m+1$为素数，则$m$为$2$的方幂。 \\
+		2.对$n \geq 0$，记$F_n = 2^{2^n}+1$，这称为费马数。证明：若$m > n$，则$F_n \mid F_m - 2$ \\
+		3.证明：若$m \neq n$，则$\left( F_m, F_n \right) = 1$。由此证明素数有无穷多个
+	\end{problem}
+	
+	\begin{note}
+		费马数中的素数称为\textbf{费马素数}。例如$$ F_0 = 3, F_1 = 5, F_2 = 17, F_3 = 257, F_4 = 65537 $$都是素数。费马曾经猜测所有的费马数$F_n$都是素数，但是欧拉在1732年证明了$$ F_5 = 641 \times 6700417 $$不是素数。目前人们不知道除去前五个费马数外，是否还存在其他的费马素数
+	\end{note}
+	
+	\begin{solution}
+		1.若$m$不为$2$的方幂，则我们可以把它利用算术基本定理拆为$m = p \times q$，其中$q$是非一的奇数,$p$是二的幂次，则
+		\begin{align*}
+			2^m + 1 = {2^{p}}^{q} + 1 = \left( 2^{p}+1 \right) \left(...\right)
+		\end{align*}
+		括号内省略的部分显然大于1，则它不是素数，矛盾 \\
+		2.$$ F_m - 2 = 2^{2^m} - 1 = \left( 2^{2^{m-1}} +1 \right) \left( 2^{2^{m-1}} -1\right) = F_{m-1} \times \left( F_{m-1} -2 \right)$$
+		这是一个递推，继续下去有\\
+		$$ F_m-2 = F_{m-1} \times ... \times F_n \times \left( F_n-2 \right) $$ \\
+		3.不妨设$ m>n $，由2，我们有$$\left( F_m, F_n \right) = \left( 2, F_n \right) = 1$$
+		由于他们两两互素，所以每一个费马数的素因数都不一样，而费马数有无穷多个，故素数有无穷多个
+	\end{solution}
+	
+	\begin{problem}
+		\\ 1.设$m,n$都是大于$1$的整数，证明：若$m^n - 1$是素数，则$ m = 2 $且$n$是素数。 \\
+		2.设$p$是素数，记$M_p = 2^p - 1$，这称为梅森数。证明：如果$p,q$是不同的素数，则$$ \left( M_p, M_q \right) = 1 $$
+	\end{problem}
+	
+	\begin{note}
+		1644年，法国数学家梅森研究过形如$M_p = 2^p - 1 $的素数，后来人们将这样的素数称为\textbf{梅森素数}。是否存在无穷多个梅森素数是一个悬而未决的问题。\textbf{梅森素数互联网大搜索计划}，网址：http://www.mersenne.org/default.php，是互联网上志愿者使用闲置计算机CPU来寻找梅森素数的一个合作计划，通过此计划，人们在2016年1月7日找到了迄今为止最大的梅森素数$$M_74207281$$，也是已知的第49个梅森素数。
+	\end{note}
+	
+	\begin{solution}
+		1.若$m > 2$，则$ m^n - 1 = \left( m-1 \right) \times \left(...\right) \equiv 0\left(mod~m-1\right) $，括号内省略的部分显然大于1，矛盾，故$m=2$ \\
+		$m=2$时，若$n$不为素数，则分解其为两个非一正整数的乘积$n = p \times q$，$ 2^n-1 = 2^{pq} - 1 = \left(2^p - 1\right) \left(...\right) $，括号内省略的部分显然大于1，矛盾，故$ n $是素数 \\
+		2.不妨设$ p>q $则$$ \left( M_p,M_q \right) = \left( 2^p-1,2^q-1 \right) = \left( \sum_{i=0}^{p-1}2^i, \sum_{j=0}^{q-1}2^j \right) = \left( M_{p-q},M_q \right)$$
+		类似于辗转相除，而$\left(p,q\right) = 1$，我们以x表示最后那个除出来的数，最后我们有$ = \left(M_1,x\right) = 1$
+	\end{solution}
+	
+	\begin{remark}
+		可能有些地方打错了，但是应该能被分辨出来我是打错的还是证错了
+	\end{remark}
+	
+\end{document}
